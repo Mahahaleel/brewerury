@@ -1,0 +1,5 @@
+var searchData=
+[
+  ['end_3',['end',['../classace__wire_1_1SimpleWireFastInterface.html#a2551d70487c270e925dc56009f59dacb',1,'ace_wire::SimpleWireFastInterface::end()'],['../classace__wire_1_1SimpleWireInterface.html#a1bd2d22b4ac12f505bacab6ee6f069c0',1,'ace_wire::SimpleWireInterface::end()'],['../classace__wire_1_1TwoWireInterface.html#a2d5f1c8a9f0bf3bb07d2891d6781521e',1,'ace_wire::TwoWireInterface::end()']]],
+  ['endtransmission_4',['endTransmission',['../classace__wire_1_1SimpleWireFastInterface.html#aefa3a536f5789dd64e8af2eb29ab5e1b',1,'ace_wire::SimpleWireFastInterface::endTransmission()'],['../classace__wire_1_1SimpleWireInterface.html#a8b642163e4a334d698ee1294340f5170',1,'ace_wire::SimpleWireInterface::endTransmission()'],['../classace__wire_1_1TwoWireInterface.html#a02b957264362b8c7a1d44d7779cacacd',1,'ace_wire::TwoWireInterface::endTransmission(bool sendStop)'],['../classace__wire_1_1TwoWireInterface.html#a4053895317558317d9c428669cac1476',1,'ace_wire::TwoWireInterface::endTransmission()']]]
+];
