@@ -30,6 +30,7 @@ if __name__ == '__main__':
     heatIndex =""
     movingAverageTemp = ""
     counter = ""
+    lampBool = ""
 
     while True:
         # try:
@@ -38,29 +39,35 @@ if __name__ == '__main__':
                 print(line)
                 print(type(line))
 
+                # b'error opening test.txt'
+                # b'Temperature thermistor: 16.71 C'
+                # b'Temperature from thermistor: 16.71'
+                # b'Moving average Check: 16.62'
+                # b'Origin moving average: 16.62'
+                # b'Writing to file... Counter: 6.00'
+                # b'Fan Delay Counter: 0'
+                # b''
+                # b'Lampbool: 1'
+
+
                 if "Temperature from thermistor: " in line:
                     line_counter = 0
 
-                    thermistorTemp = line.split("Temperature from thermistor: ")[1][0:5].replace("°","")
-                    humidity = line.split('Humidity: ')[1][0:5]
-                    temperature = line.split(" Temperature: ")[1][0:5].replace("°","")
-                    heatIndex = line.split(' Heat index: ')[1][0:5].replace("°","")
-                    
-
+                    thermistorTemp = line.split("Temperature from thermistor: ")[1] #[0:5].replace("°","")
+                # if "Moving average Check: " in line:
+                if "Origin moving average:" in line:
+                    movingAverageTemp = line.split('Origin moving average: ')[1] #[0:5].replace("°","")
                     line_counter += 1
-                
-
-                if "Moving average Check: " in line:
-                    movingAverageTemp = line.split(' Origin moving average: ')[1][0:5].replace("°","")
-
-                    line_counter += 1
-                
 
                 if "Writing to file..." in line:
-                    counter = line.split(' Counter: ')[1][0:20].split('\'')[0]
+                    counter = line.split(' Counter: ')[1]  #[0:20]
 
                     line_counter +=1
-                
+
+                if "Lampbool:" in line:
+                    lampBool = line.split('Lampbool: ')[1]  #[0:20]
+
+                    line_counter +=1
 
                 if line_counter == 3: 
                     now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -76,10 +83,11 @@ if __name__ == '__main__':
                                 "fields": {
                                     "counter": float(counter),
                                     "thermistorTemp": float(thermistorTemp),
-                                    "temperature": float(temperature),
-                                    "heatIndex": float(heatIndex),
-                                    "humidity": float(humidity),
-                                    "movingAverageTemp": float(movingAverageTemp)
+                                    "temperature": 0.0, #float(temperature),
+                                    "heatIndex": 0.0, #float(heatIndex),
+                                    "humidity": 0.0, #float(humidity),
+                                    "movingAverageTemp": float(movingAverageTemp),
+                                    "Lampbool": float(lampBool)
                                 }
                             }
                         ]

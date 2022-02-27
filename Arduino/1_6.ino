@@ -162,25 +162,25 @@ int dig3 = 0;
   
   //print output to internal port
   Serial.print(F("Temperature from thermistor: "));
-  Serial.print(T_Therm);
-  Serial.print(F("°C Humidity: "));
+  Serial.println(T_Therm);
+  // Serial.println(F("Humidity: "));
   // Serial.print(h);
-  Serial.print("10");
-  Serial.print(F("%  Temperature: "));
+  // Serial.print("10");
+  // Serial.println(F("Temperature: "));
   // Serial.print(t);
-  Serial.print("10");
+  // Serial.print("10");
 
-  Serial.print(F("°C "));
+  // Serial.print(F("    °C "));
   //Serial.print(f);
-  Serial.print(F(" Heat index: "));
+  // Serial.println(F("Heat index: "));
   // Serial.print(hic);
-  Serial.print("10");
-  Serial.println(F("°C "));
+  // Serial.print("10");
+  // Serial.println(F(" °C "));
   //Serial.print(hif);
   //Serial.println(F("°F"));
   Serial.print ("Moving average Check: ");
-  Serial.print (MovingAv);
-  Serial.print (" Origin moving average: ");
+  Serial.println (MovingAv);
+  Serial.print ("Origin moving average: ");
   Serial.println (MovingAverageTemp.get());
 
   // To Fix database script
