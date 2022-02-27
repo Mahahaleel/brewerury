@@ -47,9 +47,6 @@ int pinCS=10;
 
 // used pins:2,4,7,8,9,10,11,12,13,analog1
 void setup() {
-
-
-
 /// SETUP START PARAMETERS
 
   Tset=19;                //desired temperature
@@ -69,6 +66,15 @@ void setup() {
   // SCK of SD card module to pin 13 of Arduino
   pinMode(pinCS, OUTPUT);
 /// SETUP START PARAMETERS
+
+
+
+
+
+
+
+
+
 
 
 
