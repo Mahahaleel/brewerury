@@ -67,18 +67,6 @@ void setup() {
   pinMode(pinCS, OUTPUT);
 /// SETUP START PARAMETERS
 
-
-
-
-
-
-
-
-
-
-
-
-
   // SD Card Initialization
   if (SD.begin())
   {

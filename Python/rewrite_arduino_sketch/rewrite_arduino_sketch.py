@@ -60,8 +60,7 @@ parameters = """/// SETUP START PARAMETERS
   // MISO of SD card module to pin 12 of Arduino
   // SCK of SD card module to pin 13 of Arduino
   pinMode(pinCS, OUTPUT);
-/// SETUP START PARAMETERS
-""".format(temperature_set, measure_interval, fan_delay)
+/// SETUP START PARAMETERS""".format(temperature_set, measure_interval, fan_delay)
 
 new_data = data.split("/// SETUP START PARAMETERS")[0] + parameters + data.split("/// SETUP START PARAMETERS")[2]
 
