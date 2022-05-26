@@ -1,0 +1,24 @@
+server {
+    listen 80;
+    server_name 192.168.178.60;
+    #server_name nickdekorte.duckdns.org;
+    #listen [::]:80 default_server;
+
+    #server_name _;
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/root/py_environments/brew_control/brew_control/app.sock;
+    }
+
+    location ^~ /static/ {
+        include /etc/nginx/mime.types;
+        root /root/py_environments/brew_control/brew_control/;
+    }
+    
+    # Flask_Blog 
+    #location / {
+    #    include proxy_params;
+    #    #proxy_pass http://unix:/root/myproject/myproject.sock;
+        #proxy_pass http://unix:/root/py_environments/flask_blog/app.sock;
+    #}
+}

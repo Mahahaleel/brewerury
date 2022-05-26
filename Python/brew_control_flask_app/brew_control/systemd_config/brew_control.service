@@ -1,0 +1,18 @@
+[Unit]
+Description=Gunicorn instance to serve Brew Control Page
+After=network.target
+# tells the init system to only start this after the networking target has been reached
+# We will give our regular user account ownership of the process since it owns all of the relevant files
+[Service]
+# Service specify the user and group under which our process will run.
+User=root
+# give group ownership to the www-data group so that Nginx can communicate easily with the Gunicorn processes.
+Group=root
+# We'll then map out the working directory and set the PATH environmental variable so that the init system knows where our th>
+WorkingDirectory=/root/py_environments/brew_control/brew_control
+Environment="PATH=/root/py_environments/brew_control/brew_control/bin"
+# We'll then specify the commanded to start the service
+ExecStart=/root/py_environments/brew_control/brew_control/bin/gunicorn --workers 3 --bind unix:app.sock -m 007 wsgi:app
+# This will tell systemd what to link this service to if we enable it to start at boot. We want this service to start when th>
+[Install]
+WantedBy=multi-user.target

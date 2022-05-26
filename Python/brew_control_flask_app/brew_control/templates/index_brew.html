@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css?v=1.0.0') }}"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link rel="stylesheet" href="../static/style.css"> -->
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+    
+    *{
+    box-sizing: border-box;
+    }
+    
+    body{
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    }
+    
+    .container{
+    width: 80vw;
+    height: 80vh;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    }
+    
+    .left {
+    height: 100%;
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+    }
+    
+    .right {
+    height: 100%;
+    width: 66%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    }
+    
+    th, td {
+    border-bottom: 2px solid grey;
+    margin: 20px 10px;
+    padding: 20px;
+    align-items: left;
+    text-align: left;    
+    }
+    th {
+    background-color: rgb(129, 202, 69);
+    }
+    
+    table{
+    border-radius: 15px;
+    }
+    
+    .button-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    }
+    
+    button {
+    margin: 20px;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all ease-in .1s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.1);
+    }
+    
+    /* button:hover {
+    transform: scale(1.1);
+    } */
+    
+    button:active {
+    transform: scale(0.9);
+    }
+    
+    
+    </style>      
+<title>Brewerury Control Center</title>    
+</head>
+<body>
+    <h1>Brewerury Control Center</h1>
+    <h2>{{ success }}</h2>
+    <!-- <h2>{{ upload }}</h2> -->
+    <div class="container">
+        <div class="left">
+            <img src="/brewerury_control/images/Logo - The Brewerury - Green - Transparent.png" alt="">
+        </div>
+        <div class="right">
+            <div class="arduino-power" id="arduino-power">
+                <form method="post" class="arduino-power">
+                    <label for="">Arduino Power</label>
+                    <input type="hidden" name="btn_identifier" value="powerbutton">
+                    <button class="power" id="power" type="submit">{{ arduino_power['value'] }}</button>
+                </form>
+            </div>
+            <div class="values" id="values">
+                <form method="post">
+                <table>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Current Value</th>
+                        <th>Set Value</th>
+                    </tr>
+                    <tr>
+                        <td>Desired Temperature</td>
+                        <td>{{ values['brew_temperature'] }}</td>
+                        <td>
+                            <input type="number" name="Temperature" id="" value="{{ request.form['Temperature'] }}" step="1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Measure Interval (miliseconds)</td>
+                        <td>{{ values['measure_interval'] }}</td>
+                        <td>
+                            <input type="number" name="Tinterval" id="" value="{{ request.form['Tinterval'] }}" step="100">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Fan Deactivation Delay (nr of cycles)</td>
+                        <td>{{ values['fan_cycle_delay'] }}</td>
+                        <td>
+                            <input type="number" name="TDelay" id="" value="{{ request.form['TDelay'] }}" step="1" min="0">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>The Magic Word</td>
+                        <td></td>
+                        <td>
+                            <input type="text" name="Magic" id="" value="{{ request.form['Magic'] }}">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+                <input type="hidden" name="btn_identifier" value="upload&compile">
+                <button class="upload" id="upload" type="submit">upload & compile new arduino script</button>
+            </div>
+        </form>
+        </div>
+
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
