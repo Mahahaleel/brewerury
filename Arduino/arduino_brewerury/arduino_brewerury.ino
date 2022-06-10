@@ -9,18 +9,18 @@ int MovAv_counter;
 float MovingAv;
 
 
-//Defining variables of the display
-int CLK = 8;  
-int DIO = 7;
-//define output DHT sensor.
-#define DHTPIN 2     // Digital pin connected to the DHT sensor
-#define DHTTYPE DHT11   // DHT 11
+// //Defining variables of the display
+// int CLK = 8;  
+// int DIO = 7;
+// //define output DHT sensor.
+// #define DHTPIN 2     // Digital pin connected to the DHT sensor
+// #define DHTTYPE DHT11   // DHT 11
 
-// Initialize DHT sensor.
-DHT dht(DHTPIN, DHTTYPE);
+// // Initialize DHT sensor.
+// DHT dht(DHTPIN, DHTTYPE);
 
-//anne definition of tm (display)
-TM1637 tm(CLK,DIO);
+// //anne definition of tm (display)
+// TM1637 tm(CLK,DIO);
 
 //Thermistor Setup
 int ThermistorPin = 0;
@@ -34,27 +34,27 @@ float c1 = 1.009249522e-03, c2 = 2.378405444e-04, c3 = 2.019202697e-07;
 float Tset;
 float Tdelay;
 int NickTalkLength=10; //amount of variables exported to pi
-float Counter;
+int Counter;
 int LampBool;
 int FanDelay;
 int FanDelayCounter;
 
-//DataLogger SD 
-#include <SD.h>
-#include <SPI.h>
-File DataLogger;
-int pinCS=10;
+// //DataLogger SD 
+// #include <SD.h>
+// #include <SPI.h>
+// File DataLogger;
+// int pinCS=10;
 
 // used pins:2,4,7,8,9,10,11,12,13,analog1
 void setup() {
 /// SETUP START PARAMETERS
 
-    Tset=25;                //desired temperature
+    Tset=55;                //desired temperature
     Tdelay=7000;           //data log&measure interval (ms)
     FanDelay=35;            //Amount of cycles (Tdelay) after which the fan stop
     Serial.begin(9600);
     Serial.println(F("Beste programma V1.7 nu opgeschoond."));
-    //pinMode(8, OUTPUT);    // sets the digital pin 8 as output
+//    pinMode(8, OUTPUT);    // sets the digital pin 8 as output
     pinMode(9, OUTPUT);    // sets the digital pin 9 as output for power switch 
     pinMode(4, OUTPUT);    // sets the digital pin 4 as output for Fan
     //pinMode(2,OUTPUT);    // Used for T/H sensor
@@ -64,45 +64,50 @@ void setup() {
     // MOSI of SD card module to pin 11 of Arduino
     // MISO of SD card module to pin 12 of Arduino
     // SCK of SD card module to pin 13 of Arduino
-    pinMode(pinCS, OUTPUT);
+//    pinMode(pinCS, OUTPUT);
   /// SETUP START PARAMETERS
 
-  // SD Card Initialization
-  if (SD.begin())
-  {
-    Serial.println("SD card is ready to use.");
-  } else
-  {
-    Serial.println("SD card initialization failed");
-    return;
-  }
+  // // SD Card Initialization
+  // if (SD.begin())
+  // {
+  //   Serial.println("SD card is ready to use.");
+  // } else
+  // {
+  //   Serial.println("SD card initialization failed");
+  //   return;
+  // }
  // rtc.begin(); 
  Counter=0;  
  LampBool=0;
  
  //analog 1             //Thermistor input
-  dht.begin();
+  // dht.begin();
 
 
-  //anne
+  // //anne
 
-    // put your setup code here, to run once:
-  tm.init();
+  //   // put your setup code here, to run once:
+  // tm.init();
 
-  // set brightness; 0-7
-  tm.set(2);
+  // // set brightness; 0-7
+  // tm.set(2);
 
 }
 
 void loop() {
+  // // Reading temperature or humidity
+  // float h = dht.readHumidity();
+  // // Read temperature as Celsius (the default)
+  // float t = dht.readTemperature();
+  // // Read temperature as Fahrenheit (isFahrenheit = true)
+  // //float f = dht.readTemperature(false);
 
-  // Reading temperature or humidity
-  float h = dht.readHumidity();
-  // Read temperature as Celsius (the default)
-  float t = dht.readTemperature();
-  // Read temperature as Fahrenheit (isFahrenheit = true)
-  //float f = dht.readTemperature(false);
-
+// Test Lamp part;
+//  if(Counter%2==0) {
+//    digitalWrite(8, LOW);
+//  } else {
+//    digitalWrite(8, HIGH);
+//  };
   
   //Thermistor measurement
   Vo = analogRead(ThermistorPin);
@@ -112,16 +117,17 @@ void loop() {
   T_Therm = T_Therm - 273.15;
   T_Therm = (T_Therm * 9.0)/ 5.0 + 32.0; 
   T_Therm = (T_Therm - 32) * 5/9;
+  
   Counter=Counter+1;
   
   Serial.print("Temperature thermistor: "); 
   Serial.print(T_Therm);
   Serial.println(" C"); 
 
-//Display reset
-int dig1 = 0;
-int dig2 = 0;
-int dig3 = 0;
+// //Display reset
+// int dig1 = 0;
+// int dig2 = 0;
+// int dig3 = 0;
 
 // //DHT reading; Check if any reads failed and exit early (to try again).
 //   if (isnan(h) || isnan(t) ) {
@@ -198,25 +204,25 @@ int dig3 = 0;
   Serial.println(LampBool);
   Serial.println("  ");
 
-//log data to SD kaart
-   // Create/Open file 
-  DataLogger = SD.open("test.txt", FILE_WRITE);
+// //log data to SD kaart
+//    // Create/Open file 
+//   DataLogger = SD.open("test.txt", FILE_WRITE);
   
-  // if the file opened okay, write to it:
-  if (DataLogger) {
-    // Serial.print("Writing to file... Counter: ");
-    // Serial.println(Counter);
-    // Write to file
-    DataLogger.print(Counter);
-    DataLogger.print(";");
-    DataLogger.print(t);
-    DataLogger.print(";");
-    DataLogger.print(T_Therm);
-    DataLogger.print(";");
-    DataLogger.print(MovingAverageTemp.get());    
-    DataLogger.print(";");
-    DataLogger.println(LampBool);
-    DataLogger.close(); // close the file
+  // // if the file opened okay, write to it:
+  // if (DataLogger) {
+  //   // Serial.print("Writing to file... Counter: ");
+  //   // Serial.println(Counter);
+  //   // Write to file
+  //   DataLogger.print(Counter);
+  //   DataLogger.print(";");
+  //   DataLogger.print(t);
+  //   DataLogger.print(";");
+  //   DataLogger.print(T_Therm);
+  //   DataLogger.print(";");
+  //   DataLogger.print(MovingAverageTemp.get());    
+  //   DataLogger.print(";");
+  //   DataLogger.println(LampBool);
+  //   DataLogger.close(); // close the file
 
 
     //wtf is this
@@ -230,28 +236,28 @@ int dig3 = 0;
     //Serial.println(NickTalk[2]);
 
     
-    Serial.println("Done.");
+//     Serial.println("Done.");
 
-//    Serial.println("Grafana Measurements=Counter:" Counter ";ThermistorTemperature:"  T_Therm ";AirTemperature:"  t  ";MovingAverageTemp:"  MovingAverageTemp.get() ";LampBool:" LampBool)
-  }
-  // if the file didn't open, print an error:
-  else {
-    Serial.println("error opening test.txt");
-  }
+// //    Serial.println("Grafana Measurements=Counter:" Counter ";ThermistorTemperature:"  T_Therm ";AirTemperature:"  t  ";MovingAverageTemp:"  MovingAverageTemp.get() ";LampBool:" LampBool)
+//   }
+//   // if the file didn't open, print an error:
+//   else {
+//     Serial.println("error opening test.txt");
+  // }
 
 
-//print to screen
-dig1 = T_Therm/10;
-dig2 = T_Therm - (dig1 * 10);
-dig3 = (T_Therm * 10) - (dig1 * 100) - (dig2 * 10); 
+// //print to screen
+// dig1 = T_Therm/10;
+// dig2 = T_Therm - (dig1 * 10);
+// dig3 = (T_Therm * 10) - (dig1 * 100) - (dig2 * 10); 
 
-//Serial.print(dig3);
+// //Serial.print(dig3);
   
-  tm.display(0,dig1);
-  tm.display(1,dig2);
-  tm.point(1);
-  tm.display(2,dig3);
-  tm.display(3,12);
+//   tm.display(0,dig1);
+//   tm.display(1,dig2);
+//   tm.point(1);
+//   tm.display(2,dig3);
+//   tm.display(3,12);
 
   // Wait a few seconds between measurements.
   delay(Tdelay);
