@@ -45,18 +45,18 @@ int FanDelayCounter;
 // File DataLogger;
 // int pinCS=10;
 
-// used pins:2,4,7,8,9,10,11,12,13,analog1
+// used pins:0,2,7,8,9,10,11,12,13,analog1
 void setup() {
 /// SETUP START PARAMETERS
 
-    Tset=55;                //desired temperature
-    Tdelay=7000;           //data log&measure interval (ms)
-    FanDelay=35;            //Amount of cycles (Tdelay) after which the fan stop
+    Tset=10;                //desired temperature
+    Tdelay=10000;           //data log&measure interval (ms)
+    FanDelay=45;            //Amount of cycles (Tdelay) after which the fan stop
     Serial.begin(9600);
-    Serial.println(F("Beste programma V1.7 nu opgeschoond."));
+    Serial.println(F("Beste programma V1.72 nu opgeschoond."));
 //    pinMode(8, OUTPUT);    // sets the digital pin 8 as output
-    pinMode(9, OUTPUT);    // sets the digital pin 9 as output for power switch 
-    pinMode(4, OUTPUT);    // sets the digital pin 4 as output for Fan
+    pinMode(8, OUTPUT);    // sets the digital pin 8 as output for power switch 
+    pinMode(7, OUTPUT);    // sets the digital pin 7 as output for Fan
     //pinMode(2,OUTPUT);    // Used for T/H sensor
     // pinMode(7,OUTPUT);    // Display port
     // pinMode(8, OUTPUT);    // Display port
@@ -146,26 +146,28 @@ void loop() {
   
   ///// Switching of light and fan based on measured data of moving average of the thermistor, bucket temperature
   if (MovingAv > Tset+0.1) {
-    digitalWrite(9, LOW);
-      // Serial.println(("High"));
+    digitalWrite(8, HIGH);
+      Serial.println(("No Heating"));
     LampBool=0;
     ;
   }
   if (MovingAv < Tset-0.3) {
-    digitalWrite(9, HIGH);
-    // Serial.println(("Low"));
+    digitalWrite(8, LOW);
+      Serial.println(("Heating on"));
     LampBool=1;
     ;
   }
 
  if (LampBool==1) {
-    digitalWrite(4, HIGH);
+    digitalWrite(7, LOW);
+    Serial.println(("Fan on"));
     FanDelayCounter=0;
   }
  if (LampBool==0) {
     FanDelayCounter=FanDelayCounter+1;
     if (FanDelayCounter>FanDelay) {
-      digitalWrite(4, LOW);
+      Serial.println(("Fan off"));
+      digitalWrite(7, HIGH);
     }
   }
   

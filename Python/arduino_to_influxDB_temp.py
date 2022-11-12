@@ -93,7 +93,7 @@ if __name__ == '__main__':
                         ]
 
                         client.write_points(json_body)
-
+                        
                         print('succesfully wrote measurements to influxDB')
 
                         line_counter = 0
