@@ -51,7 +51,7 @@ void setup() {
 
     Tset=21;                //desired temperature 
     Tdelay=10000;           //data log&measure interval (ms)
-    FanDelay=45;            //Amount of cycles (Tdelay) after which the fan stop
+    FanDelay=35;            //Amount of cycles (Tdelay) after which the fan stop
     Serial.begin(9600);
     Serial.println(F("Beste programma V1.73 nu opgeschoond."));
 //    pinMode(8, OUTPUT);    // sets the digital pin 8 as output
