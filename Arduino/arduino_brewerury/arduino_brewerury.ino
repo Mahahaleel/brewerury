@@ -49,11 +49,11 @@ int FanDelayCounter;
 void setup() {
 /// SETUP START PARAMETERS
 
-    Tset=10;                //desired temperature
+    Tset=21;                //desired temperature 
     Tdelay=10000;           //data log&measure interval (ms)
     FanDelay=45;            //Amount of cycles (Tdelay) after which the fan stop
     Serial.begin(9600);
-    Serial.println(F("Beste programma V1.72 nu opgeschoond."));
+    Serial.println(F("Beste programma V1.73 nu opgeschoond."));
 //    pinMode(8, OUTPUT);    // sets the digital pin 8 as output
     pinMode(8, OUTPUT);    // sets the digital pin 8 as output for power switch 
     pinMode(7, OUTPUT);    // sets the digital pin 7 as output for Fan
